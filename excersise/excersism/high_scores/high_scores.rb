@@ -13,10 +13,10 @@ class HighScores
   end
 
   def personal_top_three
-    @scores.sort.reverse[0, 3]
+    @scores.sort.reverse[0..2]
   end
 
   def latest_is_personal_best?
-    @scores.last == @scores.max
+    latest == personal_best
   end
 end
