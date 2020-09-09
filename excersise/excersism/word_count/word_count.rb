@@ -1,12 +1,16 @@
 class Phrase
+  attr_accessor :word
   def initialize(word)
-    @word = word.split(/[\s\n,.:!&@$%^]/).reject(&:empty?).map do |str|
-      str.downcase.gsub(/^\'|\'$/, "")
-    end
+    self.word = word
   end
 
   def word_count
-    @word.group_by(&:itself).map{ |key, value| [key, value.count] }.to_h
+    words.tally
   end
+
+  private
+    def words
+      word.downcase.scan(/\b[\w\']+\b/)
+    end
 end
 
