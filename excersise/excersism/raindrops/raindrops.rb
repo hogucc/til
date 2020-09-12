@@ -1,11 +1,14 @@
 class Raindrops
-  def self.convert(num)
-    text = ""
-    text = "Pling" if num % 3 == 0
-    text += "Plang" if num % 5 == 0
-    text += "Plong" if num % 7 == 0
-    text = num.to_s if text.nil?
-
-    text
+  @@Drops = {
+    3 => 'Pling',
+    5 => 'Plang',
+    7 => 'Plong'
+  }
+  def self.convert(number)
+    result = ''
+    @@Drops.keys.each do |k|
+      number % k == 0 && result += @@Drops[k]
+    end
+    result.length > 0 ? result : number.to_s
   end
 end
