@@ -1,14 +1,3 @@
-# メソッド抽出の基本形
-def print_owing(amount)
-  print_banner
-  print_details(amount)
-end
-
-def print_details(amount)
-  puts "name: #{@name}"
-  puts "amount: #{outstanding}"
-end
-
 # メソッド抽出前
 def print_owing(amount)
   outstanding = 0.0
@@ -22,7 +11,7 @@ def print_owing(amount)
 
   # 詳細を表示
   puts "name: #{@name}"
-  puts "amount: #{amount}" 
+  puts "amount: #{outstanding}" 
 end
 
 def print_banner
