@@ -6,7 +6,7 @@ end
 
 def print_details(amount)
   puts "name: #{@name}"
-  puts "amount: #{amount}"
+  puts "amount: #{outstanding}"
 end
 
 # メソッド抽出前
