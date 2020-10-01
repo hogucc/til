@@ -9,9 +9,7 @@ def print_owing(amount)
     outstanding += order.amount
   end
 
-  # 詳細を表示
-  puts "name: #{@name}"
-  puts "amount: #{outstanding}" 
+  print_details(outstanding)
 end
 
 def print_banner
@@ -19,4 +17,10 @@ def print_banner
   puts "**************************"
   puts "*****Customer Owes********"
   puts "**************************"
+end
+
+# ローカル変数を使用している箇所をメソッド抽出する
+def print_details(outstanding)
+  puts "name: #{@name}"
+  puts "amount: #{outstanding}"
 end
