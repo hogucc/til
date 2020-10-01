@@ -1,18 +1,33 @@
 class Luhn
-  def self.valid?(str)
-    array = []
-    str = str.strip.delete(" ").reverse
-    return false if str.length <= 1
-    return false unless /\A[0-9]+\z/.match?(str)
-    str.each_char.with_index.map do |c, index|
-      c = c.to_i
-      c = c * 2 if (index + 1) % 2 == 0
-      c = c - 9 if c > 9
-      array << c
+  attr_reader :string
+
+  def initialize(string)
+    @string = string.strip.delete(' ').reverse
+  end
+
+  def check_string
+    !string.match?(/\D/) && string.length > 1
+  end
+
+  def calculate_luhn
+    luhn_string = string.scan(/\d/).map(&:to_i)
+    sum = 0
+    luhn_string.each_with_index do |num, index|
+      sum += index.even? ? num : double_number(num)
     end
+    sum % 10 == 0
+  end
 
-    return false if array.sum % 10 != 0
+  def double_number(number)
+    double_number = number * 2
+    double_number > 9 ? double_number -9 : double_number
+  end
 
-    true
+  def check_luhn
+    check_string && calculate_luhn
+  end
+
+  def self.valid?(string)
+    Luhn.new(string).check_luhn
   end
 end
