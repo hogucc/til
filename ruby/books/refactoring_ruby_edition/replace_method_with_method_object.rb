@@ -10,3 +10,24 @@ class Account
     important_value3 - 2 * important_value1
   end
 end
+
+# リファクタリングの過程
+# クラスの宣言
+class Gammma
+  attr_reader :account,
+              :input_val_arg,
+              :quantity,
+              :year_to_date,
+              :important_value1,
+              :important_value2,
+              :important_value3
+
+  # コンストラクタの追加
+  def initialize(account, input_val_arg, quantity_arg, year_to_date_arg)
+    @account = account
+    @input_val = input_val_arg
+    @quantity = quantity_arg
+    @year_to_date = year_to_date
+  end
+end
+
