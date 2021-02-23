@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 def max_profit(prices)
-  min_idx = 0
-  max_profit = 0
-  prices.each_with_index do |price, idx|
-    if price < prices[min_idx]
-      min_idx = idx
-      max_profit = max_profit + prices[min_idx] - price
-    elsif max_profit < price - prices[min_idx]
-      max_profit = price - prices[min_idx]
-    end
+  min_price = prices[0]
+  profit = 0
+  (1..prices.length-1).each do |idx|
+    profit = prices[idx] - min_price if profit < prices[idx] - min_price
+    min_price = prices[idx] if prices[idx] < min_price
   end
-  max_profit
+  profit
 end
