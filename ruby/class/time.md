@@ -31,3 +31,24 @@ str.in_time_zone.class
 - xxx.to_time
 - Time.now.end_of_day
 - Time.now.since(x.minute)
+
+※ 環境変数に無効なタイムゾーンを設定した場合はUTC扱いになるので注意！
+
+### strftimeパターン集
+
+cf. [[Ruby/Rails] strftimeのよく使うテンプレート｜TechRacho by BPS株式会社](https://techracho.bpsinc.jp/hachi8833/2016_10_06/25960)
+
+「2022年01月20日 20:35:12」
+```ruby
+Time.zone.now.strftime("%Y年%m月%d日 %H:%M:%S")
+```
+
+「20220120」
+```ruby
+Time.zone.now.strftime('%Y%m%d')
+```
+
+「08:35 PM」
+```ruby
+time.strftime('%I:%M %p')
+```
