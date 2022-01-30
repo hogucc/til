@@ -1,0 +1,26 @@
+# accepts_nested_attributes_for
+https://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html#method-i-accepts_nested_attributes_for~~~~
+
+DHHは廃止したいと言及しているメソッド
+
+cf. https://github.com/rails/rails/pull/26976#discussion_r87855694
+
+親モデルに紐づく子モデルの保存を簡易的にするもの
+
+たとえば親の作成と同時に子モデルも作成することができる
+
+こちらの記事の例がわかりやすい
+
+[【Rails】accepts_nested_attributes_forを使用しない方が良いワケとその代替方法](https://zenn.dev/murakamiiii/articles/5ecefb7a58d1ef)
+
+`xxx_attributes` というパラメータを親モデルのcreate時に渡すことで子モデルも作成されている
+
+が、api docを見たかんじ説明がとても長くて、内部的にいろいろなことをしているように見えるという
+
+内部でどんなことが行われているかをすべて理解して触るのはありだが、そうでないなら何が起こるか不確定なので使わないほうが良いかも
+
+もしこのメソッドを使うことが不都合になった場合の、引き剥がし業も大変そうだし、引き剥がしても結局動作は変わらないので、徒労感がすごそう
+
+あと、フロント側をReactやVueで書いてた場合、viewではaccepts_nested_attributes_forの仕組みを生かせず、モデルでしか恩恵を受けられない
+
+であれば、あえてaccepts_nested_attributes_forを使うメリットも無い気がするので、自前で子モデルも作成する実装を組むのが良さそう
