@@ -1,4 +1,4 @@
-# Arel
+# Arel(アレル)
 
 https://github.com/rails/arel
 
