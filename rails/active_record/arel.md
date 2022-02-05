@@ -28,3 +28,11 @@ Arelはprivate APIで、サポートしないよと書かれている
 なので、バージョンアップで動かなくなる可能性がある
 
 そもそも素直にSQLを書けばArelを使わずに済むので、上記のリスクがある状態で使い続けるメリットはなさげ
+
+## Arel.sqlは例外
+
+Arel.sqlはpublic API。（api docに載っている）
+
+https://api.rubyonrails.org/classes/Arel.html#method-c-sql
+
+なので、private APIだから使わないという理由づけに対してはArel.sqlは例外
