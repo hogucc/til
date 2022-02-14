@@ -52,7 +52,7 @@ puts '123'.oct # => 83
 puts '0b11'.oct # => 3
 ```
 
-# [nth, len]
+## [nth, len]
 slice(nth, len)のエイリアスメソッド
 
 nth文字目からlen文字分を取得し、新しい文字列として返す
@@ -64,3 +64,40 @@ puts str0
 # => bar
 # 非破壊的
 ```
+
+## concat
+<<のエイリアスメソッド
+文字列を破壊的に連結する
+
+```ruby
+def hoge(n)
+  if n % 3 == 0
+    "hello"
+  elsif n % 5 == 0
+    "world"
+  end
+end
+
+str = ''
+str.concat hoge(3)
+str.concat hoge(5)
+
+puts str
+# => helloworld
+```
+
+## strip
+
+文字列の先頭と末尾の空白文字（`\t\r\n\f\v`）を取り除く
+
+## strip!
+
+文字列の先頭と末尾の空白文字（`\t\r\n\f\v`）を破壊的に取り除く
+
+## chomp
+末尾から改行コードを削除する
+
+## chop
+末尾の文字を取り除く。ただし、文字列の末尾が `"\r\n"` であれば2文字とも取り除く
+
+
