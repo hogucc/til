@@ -100,4 +100,18 @@ puts str
 ## chop
 末尾の文字を取り除く。ただし、文字列の末尾が `"\r\n"` であれば2文字とも取り除く
 
+## eql?
+同じ文字列の場合はtrueを返す。オブジェクトIDが異なっていても、同じ文字列ならtrueを返す
 
+基本的に `String#==(other)` と同じ結果を返す
+
+が、otherが文字列以外の場合は `other.to_s` の結果と比較される
+
+```ruby
+a1 = "abc"
+a2 = 'abc'
+
+print a1.eql? a2
+print a1 == a2
+# => truetrue
+```
