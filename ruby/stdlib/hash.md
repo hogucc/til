@@ -41,3 +41,36 @@ stepを足しながらlimitを超えるまでブロックを繰り返す
 7
 6
 ```
+
+## values
+ハッシュの全値を返す。引数は取らない
+
+```ruby
+hash = {price: 100, order_code: 200, order_date: "2018/09/20", 
+tax: 0.8}
+p hash.values
+# => [100, 200, "2018/09/20", 0.8]
+```
+
+## values_at
+
+引数で指定されたキーに対応する配列を返す
+
+```ruby
+hash = {price: 100, order_code: 200, order_date: "2018/09/20", tax: 0.8}
+p hash.values_at(:price, :tax) 
+# => [100, 0.8]
+```
+
+## fetch
+
+```ruby
+hash = {price: 100, order_code: 200, order_date: "2018/09/20", 
+tax: 0.8}
+p hash.fetch(:price) # => 100
+# 該当する値がなく、引数defaultが与えられていればその値を返す
+p hash.fetch(:hoge, 'fuga') # => "fuga"
+# ブロックが与えられている場合はブロックを評価した値を返す
+p hash.fetch(:hoge){|key| "#{key} is not exist"}
+# => "hoge is not exist"
+```
