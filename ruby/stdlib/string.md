@@ -115,3 +115,20 @@ print a1.eql? a2
 print a1 == a2
 # => truetrue
 ```
+
+# casecmp
+
+アルファベットの大文字小文字の違いを無視して、文字列の順序を比較する
+同じ文字列の場合は0、selfが大きいときは1、小さいときは-1を返す
+
+```ruby
+p "stringaa".casecmp("stringAA")
+=> 0
+```
+
+`String#<=>` はアルファベットの大文字小文字を区別する
+
+```ruby
+p "stringaa" <=> "stringAA"
+=> 1                      
+```
