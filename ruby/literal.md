@@ -20,6 +20,21 @@ if need_define_foo
   EOS
   #↑終端行をインデントできる
 end
+
+# これだとシンタックスエラーになる
+s = <<EOF
+    Hello,
+    Ruby
+    EOF
+p s
+# => can't find string "EOF" anywhere before EOF (SyntaxError)
+
+# 終端行をインデントしないならOK
+s = <<EOF
+    Hello,
+    Ruby
+EOF
+p s # => "    Hello,\n    Ruby\n"
 ```
 
 `<<~識別子` と書くと内部の文字列をインデントさせても無視される

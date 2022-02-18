@@ -40,3 +40,17 @@ cf. https://docs.ruby-lang.org/ja/latest/method/Object/i/is_a=3f.html
 # relationがActiveRecord::Relationのインスタンスであれば真
 relation.is_a?(ActiveRecord::Relation)
 ```
+
+## equal?
+
+同一のオブジェクトの場合にtrueを返す
+
+```ruby
+a1 = "abc"
+a2 = 'abc'
+
+print a1.equal? a2
+# string#eql?は同じ文字列ならtrueを返す
+print a1.eql? a2
+# => falsetrue
+```
