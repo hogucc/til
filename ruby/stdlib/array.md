@@ -70,3 +70,39 @@ p [1,2,3].zip([4,5,6], [7,8])
 # 数がたりない場合はnil埋めされる
 ```
 
+## shift, unshift
+
+shiftはselfの先頭から1要素を破壊的に取り出す
+
+unshiftはselfの先頭に引数の値を破壊的に追加する
+
+```ruby
+1: s = ["one", "two", "three"]
+2: s.shift
+3: s.shift
+4: s.unshift("dummy")
+
+# <実行結果>
+# 1: ["one", "two", "three"]
+# 2: ["two", "three"]
+# 3: ["three"]
+# 4: ["dummy", "three"]
+```
+
+## pop, push
+pushはselfの末尾に引数の値を破壊的に追加する。appendのエイリアス。
+
+popはselfの末尾から要素を破壊的に取り除いて返す。引数を指定した場合は指定した数分取り除き、それを配列で返す
+
+```ruby
+array = [1, 2, 3]
+array.push 4
+p array
+# => [1, 2, 3, 4]
+array.pop
+p array
+# => [1, 2, 3]
+array.pop 2
+p array
+# => [1]
+```
