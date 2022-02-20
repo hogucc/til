@@ -119,3 +119,12 @@ Time.zone.now.strftime('%Y%m%d')
 ```ruby
 time.strftime('%I:%M %p')
 ```
+
+## + other
+
+selfにother秒だけ加算する
+
+```ruby
+puts Time.now + 3600
+# => 2022-02-21 00:19:42 +0900
+```
