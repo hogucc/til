@@ -74,3 +74,15 @@ p hash.fetch(:hoge, 'fuga') # => "fuga"
 p hash.fetch(:hoge){|key| "#{key} is not exist"}
 # => "hoge is not exist"
 ```
+
+## reject
+
+selfを複製してブロックを評価した値が真になる要素を削除したハッシュを返す（非破壊的な変更）
+
+```ruby
+h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
+
+p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
+p h
+# => {2=>"8", 4=>"6", 6=>"4", 8=>"2"}
+```
