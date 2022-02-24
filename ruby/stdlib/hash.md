@@ -1,5 +1,35 @@
 # Hashクラス
 
+## .new {|hash, key| ... }
+
+空の新しいハッシュを生成し、ブロックの評価結果がデフォルト値になる
+
+設定したデフォルト値は Hash#default_procで参照できる
+
+```ruby
+h = Hash.new {|hash, key| hash[key] = 'foo'}
+
+# 値が設定されていない場合は例外を発生させることもできる
+h = Hash.new {|hash, key|
+  raise(IndexError, "hash[#{key}] has no value")
+}
+# 値が設定されていないのに参照すると例外が発生する
+h[1]
+# => hash[1] has no value (IndexError)
+```
+
+## .default_proc
+
+ハッシュのデフォルト値を返すProcオブジェクトを返す
+
+ハッシュがブロック形式のデフォルト値を持たない場合はnilを返す
+
+```ruby
+h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
+p block = h.default_proc # => #<Proc:0x0x401a9ff4>
+p block.call({}, :foo) #=> "The foo not exist in {}"
+```
+
 ## each
 each_pairのエイリアスメソッド
 
