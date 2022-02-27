@@ -14,7 +14,7 @@ puts 0b2
 # => numeric literal without digits (SyntaxError)
 ```
 
-## times
+## #times
 
 self回繰り返す
 
@@ -26,4 +26,20 @@ self回繰り返す
 # ブロックパラメータには0からself-1までが渡される
 4.times {|n| print n }
 0123
+```
+
+## #odd?
+selfが奇数であればtrueを返す
+
+```ruby
+5.odd?     # => true
+10.odd?    # => false
+```
+
+## #even?
+selfが偶数であればtrueを返す
+
+```ruby
+10.even?    # => true
+5.even?     # => false
 ```
