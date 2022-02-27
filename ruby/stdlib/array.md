@@ -1,6 +1,6 @@
 # Arrayクラス
 
-## product
+## #product
 
 レシーバの配列と引数で与えられた配列から要素を1個ずつとって配列にして返す
 
@@ -9,7 +9,7 @@
 # => [[1, 3], [1, 4], [2, 3], [2, 4]]
 ```
 
-## each_cons(n)
+## #each_cons(n)
 
 要素を重複ありでn要素ずつに区切り、ブロックに渡して繰り返す
 
@@ -20,7 +20,7 @@
 # [3, 4, 5]            
 ```
 
-## each_slice(n)
+## #each_slice(n)
 
 each_consと似ているが、each_sliceは要素を重複させない
 
@@ -30,7 +30,7 @@ each_consと似ているが、each_sliceは要素を重複させない
 # [4, 5]
 ```
 
-## compact
+## #compact
 
 selfからnilを取り除いた配列を返す
 
@@ -45,7 +45,7 @@ p ary           #=> [1, 2, 3]
 p ary.compact!  #=> nil
 ```
 
-## flatten
+## #flatten
 
 selfを再帰的に平坦化する
 flatten!の場合、破壊的にselfを変更するが、平坦化が行われない場合はnilを返す
@@ -57,7 +57,7 @@ a.flatten! # => [1, 2, 3, 4, 5]
 a.flatten! # => nil
 ```
 
-## zip
+## #zip
 配列の配列を作成し、返す
 
 ```ruby
@@ -70,7 +70,7 @@ p [1,2,3].zip([4,5,6], [7,8])
 # 数がたりない場合はnil埋めされる
 ```
 
-## shift, unshift
+## #shift, #unshift
 
 shiftはselfの先頭から1要素を破壊的に取り出す
 
@@ -89,7 +89,7 @@ unshiftはselfの先頭に引数の値を破壊的に追加する
 # 4: ["dummy", "three"]
 ```
 
-## pop, push
+## #pop, push
 pushはselfの末尾に引数の値を破壊的に追加する。appendのエイリアス。
 
 popはselfの末尾から要素を破壊的に取り除いて返す。引数を指定した場合は指定した数分取り除き、それを配列で返す
@@ -105,4 +105,24 @@ p array
 array.pop 2
 p array
 # => [1]
+```
+
+## #delete_if
+
+ブロックの評価結果が真になった要素を破壊的に削除する。真になる要素がなくても常にselfを返す
+
+reject!も動きは同じだが、reject!は真になる要素が存在しない場合はnilを返す。ある場合はselfを返す
+
+```ruby
+a = [0, 1, 2, 3, 4, 5]
+a.delete_if{|x| x % 2 == 0}
+p a #=> [1, 3, 5]
+
+a = [1, 3, 5]
+a.delete_if{|x| x % 2 == 0}
+#=> [1, 3, 5]
+
+a = [1, 3, 5]
+a.reject!{|x| x % 2 == 0}
+# => nil
 ```
