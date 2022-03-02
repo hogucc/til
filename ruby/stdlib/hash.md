@@ -71,6 +71,11 @@ h.each {|a| p a.class}
 
 h = {:a=>1}
 h.each_pair {|a| p a.class}
+
+h = {:a=>1, :b=>2}
+h.each_pair {|key, value| p [key, value]}
+# => [:a, 1]
+# [:b, 2]
 ```
 
 ## invert
