@@ -132,3 +132,14 @@ p "stringaa".casecmp("stringAA")
 p "stringaa" <=> "stringAA"
 => 1                      
 ```
+
+## self =~ other
+正規表現otherとマッチを行う
+
+マッチしなければnil、マッチしたら、マッチしたインデックス位置を返す
+
+```ruby
+p "string" =~ /str/   # => 0
+p "string" =~ /not/   # => nil
+p "abcfoo" =~ /foo/   # => 3
+```
