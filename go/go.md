@@ -122,3 +122,67 @@ switch i.(type) {
 // don't know
 ```
 
+## 構造体
+
+```go
+type Vertex struct {
+X int
+Y int
+}
+
+func main() {
+v := Vertex{1, 2}
+// 構造体のフィールドにはドットでアクセスする
+v.X = 4
+fmt.Println(v.X)
+}
+```
+
+以下のように構造体に構造体を含めることもできる
+
+```go
+type Item struct {
+    Name string
+    Amount uint
+}
+
+type User struct {
+    Name string
+    Address
+}
+
+taro := User{
+    Name: "Taro",
+    Item: Address{
+        Name: "knife",
+        Prefecture: 1
+    }
+}
+
+taro.Name // "Taro"
+taro.Item.name // "knife"
+taro.Item.Amount // 1
+taro.Amount // 1
+```
+
+構造体は値型なため、関数の引数として渡すときは以下のように参照渡しする必要がある
+
+以下は[Go言語：文法基礎まとめ - Qiita](https://qiita.com/HiromuMasuda0228/items/65b9a593275f769f6b69)から引用
+
+```go
+type Point struct {
+  X, Y int
+}
+
+func swap(p *Point) {
+    x, y = p.X, p.Y
+    p.X = y
+    p.Y = x
+}
+
+p := Point{X: 1, Y: 2}
+swap(&p)
+
+p.X // == 2
+p.Y // == 1
+```
