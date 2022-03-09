@@ -60,3 +60,65 @@ float32 float64
 
 complex64 complex128
 ```
+
+## 配列型
+
+```go
+package main
+
+import "fmt"
+
+// [要素数]要素の型{初期値}
+primes := [6]int{2, 3, 5, 7, 11, 13}
+fmt.Println(primes[3])
+// 7
+
+// a[1:4]は要素のうち1から3を含むスライスを作る（最初の要素は含み、最後の要素は含まない）
+var s []int = primes[1:4]
+fmt.Println(s)
+// [3 5 7]
+```
+
+## interface{}型
+
+```go
+// 全ての型に互換性のあるインターフェースを定義できる
+func main() {
+    var i interface{} = "hello"
+    
+    s := i.(string)
+    fmt.Println(s)
+    // hello
+    
+    s, ok := i.(string)
+    fmt.Println(s, ok)
+    // hello true
+    
+    f, ok := i.(float64)
+    fmt.Println(f, ok)
+    // 0 false
+    
+    // インターフェースの値iが具体的な型(ここではfloat64)を保持し、基になる型の値を変数fに代入することを主張する
+    f = i.(float64) // ここでpanicを起こす
+    // panic: interface conversion: interface {} is string, not float64
+    fmt.Println(f)
+}
+```
+
+上記のように動的に行う型チェックのことを型アサーションといい、 `x.(T)` の形式で構成される
+
+```go
+//型アサーションと分岐を組み合わせた処理もできる
+var i interface{} = "hello"
+
+switch i.(type) {
+    case bool:
+        fmt.Println("bool")
+    case int, uint:
+        fmt.Println("int or uint")
+    default:
+        fmt.Println("don't know")
+}
+// don't know
+```
+
