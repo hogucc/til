@@ -143,3 +143,18 @@ p "string" =~ /str/   # => 0
 p "string" =~ /not/   # => nil
 p "abcfoo" =~ /foo/   # => 3
 ```
+
+## #index(pattern, pos)
+文字列のpos番目からpatternを検索し、最初に見つかった位置を返す
+
+見つからなければnilを返す
+
+```ruby
+p "astrochemistry".index("str")         # => 1
+p "regexpindex".index(/e.*x/, 2)        # => 3
+p "character".index(?c)                 # => 0
+
+p "foobarfoobar".index("bar", 6)        # => 9
+p "foobarfoobar".index("bar", -6)       # => 9
+```
+
