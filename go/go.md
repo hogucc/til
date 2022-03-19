@@ -186,3 +186,61 @@ swap(&p)
 p.X // == 2
 p.Y // == 1
 ```
+
+## 関数
+`func 関数名（引数　引数の型）戻り値の型 {}` の形式で定義する
+
+```go
+// 戻り値なし
+func hoge() {
+}
+
+// 引数が複数の場合
+func add(x, y int) int {
+  return x + y
+}
+
+// 戻り値が複数の場合
+func swap(x, y string)(string, string) {
+  return y, x
+}
+```
+
+## スコープ
+
+パッケージの中で変数、関数や定数を公開するかしないかをコントロールできる
+
+識別子の1文字目が大文字の場合は公開される
+
+小文字の場合はパッケージ内部でしか使えない
+
+```go
+package hoge
+
+const (
+  MAX = 1000
+  min = 1
+)
+
+func HogeFunc(x int) int {
+  return x
+}
+
+func hogefuga(y int) int {
+  return y
+}
+```
+
+```go
+// main.go
+
+package main
+
+import "hoge"
+
+hoge.MAX // => 1000
+hoge.min // => error
+
+hoge.HogeFunc(3) => 3
+hoge.hogefuga(3) => error
+```
