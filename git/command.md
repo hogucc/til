@@ -39,3 +39,16 @@ error: Commit xxxxxx is a merge but no -m option was given.
 
 cf. https://git-scm.com/docs/git-revert
 
+# gitで雑になんか試したいとき
+
+- `git tag tmp_hogucc` でタグを切って試す
+- 元ブランチから別の作業ブランチを切って作業する
+
+# ブランチにメモを残しておきたいとき
+
+`git branch --edit-description [<branchname>]` でブランチにメモを残せる
+
+`<branchname>`を省略すると、現在のブランチにメモが追加される
+
+メモを表示するコマンドは `git config branch.<branchname>.description`
+
