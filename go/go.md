@@ -276,3 +276,63 @@ hoge.min // => error
 hoge.HogeFunc(3) => 3
 hoge.hogefuga(3) => error
 ```
+
+## map
+
+cf. https://ashitani.jp/golangtips/tips_map.html
+
+Goではハッシュをmapと呼ぶ
+
+`m := map[string]int{"apple": 150, "banana": 300, "lemon": 300}` の形式で定義する
+
+### キーを指定して値を取得
+`v, ok:=マップ[キー]`の形式でキーを指定して値を取得する
+
+```go
+m := map[string]int{"apple": 150, "banana": 300, "lemon": 300}
+
+v, ok := m["apple"]
+fmt.Println(v)  // => "150"
+fmt.Println(ok) // => "true"
+
+// 未定義のキーを渡すと0が返る
+v, ok = m["papaia"]
+fmt.Println(v)  // => "0"
+fmt.Println(ok) // => "false"
+```
+
+### マップに要素を追加する
+
+最初に空のマップを作ってから要素を追加する場合は以下のような書き方になる
+
+```go
+m := map[string]int{}
+// m := make(map[string]int)
+
+m["apple"] = 150
+m["banana"] = 200
+m["lemon"] = 300
+
+fmt.Println(m["apple"])
+```
+
+### マップ内にキーが存在するかどうか調べる
+
+```go
+m := map[string]int{"apple": 150, "banana": 300, "lemon": 300}
+
+_, ok := m["apple"]
+fmt.Println(ok) // => "true"
+_, ok = m["orange"]
+fmt.Println(ok) // => "false"
+```
+
+### マップの要素数を取得する
+
+len(マップ)で求められる
+
+```go
+m := map[string]int{"apple": 150, "banana": 300, "lemon": 300}
+
+fmt.Println(len(m))
+```
