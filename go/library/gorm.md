@@ -65,3 +65,26 @@ db.Model(&User{}).Create([]map[string]interface{}{
   {"Name": "jinzhu_2", "Age": 20},
 })
 ```
+
+### 単一のオブジェクトを取得する
+
+```go
+// 1件目のレコードを取得かつ主キー順に並べる
+db.First(&user)
+// SELECT * FROM users ORDER BY id LIMIT 1;
+
+// 1件目のレコードを取得
+db.Take(&user)
+// SELECT * FROM users LIMIT 1;
+
+// 最後のレコードを取得かつ主キー順に並べる
+db.Last(&user)
+// SELECT * FROM users ORDER BY id DESC LIMIT 1;
+
+result := db.First(&user)
+result.RowsAffected // レコード件数を返す
+result.Error        // errorかnilを返す
+
+// ErrRecordNotFoundエラーが起きていないかチェックする
+errors.Is(result.Error, gorm.ErrRecordNotFound)
+```
