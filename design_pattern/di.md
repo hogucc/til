@@ -18,3 +18,31 @@ Dependency Injectionの略
   - インターフェースを使う側は実装オブジェクトを意識しなくて良いため
 - ユニットテストがしやすい
   - DBをモックすることでインターフェースを使う側はテストしやすい
+
+## GoではどのようにDIを使う？
+
+クリーンアーキテクチャの初期化処理でよく使われる
+
+コードは以下から抜粋
+https://www.cetus-media.info/article/2020/go-wire/
+
+コントローラーを作成する際、コントローラーに必要なコンポーネントをInjectionしていく
+
+```go
+func NewController(usecase Usecase) Controller {
+	return &controller{usecase}
+}
+
+func NewUsecase(repository Repository) Usecase {
+	return &usecase{repository}
+}
+
+func NewRepository(db DB) Repository {
+	return &repository{db}
+}
+
+func main() {
+	db := InitDB()
+	controller := NewController(NewUsecase(NewRepository(db)))
+}
+```
