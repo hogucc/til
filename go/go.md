@@ -336,3 +336,28 @@ m := map[string]int{"apple": 150, "banana": 300, "lemon": 300}
 
 fmt.Println(len(m))
 ```
+
+## ループ
+### forの基本形
+```go
+for i := 0; i < 5; i++ {
+    // iの値が0から9まで変化していく
+    fmt.Printf("i = %d\n", i)
+} 
+```
+
+### rangeを使ったfor
+
+```go
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+// 配列に対するrangeはindex番号と要素の値が返される
+for i, v := range pow {
+    fmt.Printf("2**%d = %d\n", i, v)
+}
+
+// index番号が不要の場合は以下のように書く
+for _, v := range pow {
+    fmt.Printf("2**%d = %d\n", i, v)
+}
+```
