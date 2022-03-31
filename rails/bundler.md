@@ -14,3 +14,9 @@ cf. https://bundler.io/v2.3/man/bundle-add.1.html
 ```
 bundle add rails --group "development, test"
 ```
+
+### bundle update
+
+bundle updateは依存するライブラリもすべてバージョンアップされる
+
+bundle update --conservativeを使うと、指定したライブラリのバージョンだけあげることができる
