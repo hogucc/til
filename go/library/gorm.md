@@ -88,3 +88,37 @@ result.Error        // errorかnilを返す
 // ErrRecordNotFoundエラーが起きていないかチェックする
 errors.Is(result.Error, gorm.ErrRecordNotFound)
 ```
+
+## レコードの取得
+
+### IN句
+
+```go
+db.Where("name IN ?", []string{"jinzhu", "jinzhu 2"}).Find(&users)
+// SELECT * FROM users WHERE name IN ('jinzhu','jinzhu 2');
+```
+
+### Pluck
+
+1つのカラムの値を取得してsliceに代入する
+
+```go
+var ages []int64
+db.Model(&users).Pluck("age", &ages)
+
+var names []string
+db.Model(&User{}).Pluck("name", &names)
+
+db.Table("deleted_users").Pluck("name", &names)
+
+// Distinct Pluck
+db.Model(&User{}).Distinct().Pluck("Name", &names)
+// SELECT DISTINCT `name` FROM `users`
+```
+
+2つ以上のカラムを指定する場合は、以下のように `Scan` もしくは `Find` を利用する
+
+```go
+db.Select("name", "age").Scan(&users)
+db.Select("name", "age").Find(&users)
+```
