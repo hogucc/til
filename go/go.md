@@ -111,6 +111,14 @@ func main() {
 }
 ```
 
+スライスに新しい要素を追加する場合は、Goの組み込みのappendを使う
+
+```go
+var s []int
+
+s = append(s, 2, 3, 4)
+```
+
 ## interface{}型
 
 ```go
