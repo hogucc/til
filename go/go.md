@@ -246,6 +246,24 @@ func swap(x, y string)(string, string) {
 }
 ```
 
+## メソッド
+
+Goにはクラスのしくみはないが、型にメソッドを定義できるようになる
+
+メソッドはレシーバ引数を関数に取る
+
+レシーバはfuncキーワードとメソッド名の間に自身の引数リストで表現する
+
+```go
+type Vertex struct {
+	X, Y float64
+}
+
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+```
+
 ## スコープ
 
 パッケージの中で変数、関数や定数を公開するかしないかをコントロールできる
