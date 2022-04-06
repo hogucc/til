@@ -66,6 +66,54 @@ db.Model(&User{}).Create([]map[string]interface{}{
 })
 ```
 
+### 関連データと関連付けて作成する
+
+関連データがゼロ値でなければ関連データもupsertされる
+その際、関連データのHooksメソッドも実行される
+
+```go
+type CreditCard struct {
+  gorm.Model
+  Number   string
+  UserID   uint
+}
+
+type User struct {
+  gorm.Model
+  Name       string
+  CreditCard CreditCard
+}
+
+db.Create(&User{
+  Name: "jinzhu",
+  CreditCard: CreditCard{Number: "411111111111"}
+})
+// INSERT INTO `users` ...
+// INSERT INTO `credit_cards` ...
+```
+
+## トランザクション
+
+トランザクション内で一連の処理を実行するサンプルフロー
+
+```go
+db.Transaction(func(tx *gorm.DB) error {
+  if err := tx.Create(&Animal{Name: "Giraffe"}).Error; err != nil {
+    // 何らかのエラーを返却するとロールバックされる
+    return err
+  }
+  
+  if err := tx.Create(&Animal{Name: "Lion"}).Error; err != nil {
+    return err
+  }
+  
+  // nilが返却されるとトランザクション内の全処理がコミットされる
+  return nil
+}
+```
+
+
+## レコードの取得
 ### 単一のオブジェクトを取得する
 
 ```go
@@ -88,8 +136,6 @@ result.Error        // errorかnilを返す
 // ErrRecordNotFoundエラーが起きていないかチェックする
 errors.Is(result.Error, gorm.ErrRecordNotFound)
 ```
-
-## レコードの取得
 
 ### IN句
 

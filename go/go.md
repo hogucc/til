@@ -387,3 +387,15 @@ for _, v := range pow {
     fmt.Printf("2**%d = %d\n", i, v)
 }
 ```
+
+## ゼロ値
+
+変数に初期値を与えずに宣言すると、ゼロ値（zero value）が与えられる
+
+ゼロ値は型によって以下のように与えられる
+
+数値型（int, floatなど）: 0
+
+bool型: false
+
+string型: ""（空文字列）
