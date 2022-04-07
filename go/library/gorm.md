@@ -14,6 +14,24 @@ type Product struct {
 }
 ```
 
+## モデルの宣言
+
+デフォルトでは、主キーにID、テーブル名を表すための複数形かつスネークケースな構造体名、スネークケースなカラム名、作成と更新の時間をトラッキングするためのCreatedAt、UpdatedAtフィールドを利用する
+
+```go
+type User struct {
+  ID           uint
+  Name         string
+  Email        *string
+  Age          uint8
+  Birthday     *time.Time
+  MemberNumber sql.NullString
+  ActivatedAt  sql.NullTime
+  CreatedAt    time.Time
+  UpdatedAt    time.Time
+}
+```
+
 ## CRUD
 ### レコードを作成する
 
