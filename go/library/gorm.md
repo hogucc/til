@@ -32,6 +32,16 @@ type User struct {
 }
 ```
 
+作成/更新日時は以下のように宣言すると、create/update時に自動で日付を更新してくれる
+
+```go
+type User struct {
+  ...
+  CreatedAt    time.Time `gorm:"autoCreateTime"` 
+  UpdatedAt    time.Time `gorm:"autoUpdateTime"` 
+}
+```
+
 ## CRUD
 ### レコードを作成する
 
