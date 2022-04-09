@@ -186,3 +186,31 @@ db.Model(&User{}).Distinct().Pluck("Name", &names)
 db.Select("name", "age").Scan(&users)
 db.Select("name", "age").Find(&users)
 ```
+
+## SQLインジェクションを引き起こすパターン
+
+- [Gormにおける「仕様通り」なSQLインジェクションの恐れのある実装についての注意喚起 - ANDPAD Tech Blog](https://tech.andpad.co.jp/entry/2022/02/18/140000)
+
+Find() や First() Last() Take() Delete()などの関数ではStructだけ引数で渡すこと！
+
+以下の最後の、第二引数が文字列で渡るパターンでSQLインジェクションが発生する可能性がある
+
+```go
+db.Where("id = ?", "1").Find(&users)
+// SELECT * FROM `users`  WHERE (id = '1')
+db.Where(User{ID: 1}).Find(&users)
+// SELECT * FROM `users`  WHERE (`users`.`id` = 1)
+db.Find(&users, "id = ?", "1")
+// SELECT * FROM `users`  WHERE (id = '1')
+db.Find(&users, User{ID: 1})
+//  SELECT * FROM `users`  WHERE (`users`.`id` = 1)
+db.Find(&users, "1")
+// SELECT * FROM `users`  WHERE (`users`.`id` = '1') 
+```
+
+userInputIDというパラメーターが渡ってきた場合、意図していない値まで取得できてしまう
+```go
+userInputID := "1=1"
+db.Find(&users, userInputID)
+// SELECT * FROM `users`  WHERE (`users`.`id` = '1=1') 
+```
