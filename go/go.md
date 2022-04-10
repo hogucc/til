@@ -18,6 +18,30 @@ import (
 )
 ```
 
+### パッケージをインストールしても実行できない場合
+
+cf. [command not foundと$PATH【Go】 - 技術向上](https://tech-up.hatenablog.com/entry/2019/04/04/224255)
+
+PATHが通っていない可能性あり
+
+PATHが通っているかどうかは以下のコマンドで確認できる
+
+```
+# GOPATHはGoの作業ディレクトリ
+$ echo $GOPATH
+# PATHはインストールしたパッケージのコマンドなどが記述されたバイナリファイルが格納される場所
+$ echo $PATH
+```
+
+もし上記のコマンドを実行しても何も出力されない場合、 zshrcなどに以下の記述が必要
+
+```go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+ターミナルでexportしても良いが、ターミナルを起動する度に実行する必要があるので、zshrcなどに環境変数として設定したほうが楽
+
 ## 変数
 
 明示的な宣言と暗黙的な宣言の2種類ある
