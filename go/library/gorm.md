@@ -224,3 +224,26 @@ userInputID := "1=1"
 db.Find(&users, userInputID)
 // SELECT * FROM `users`  WHERE (`users`.`id` = '1=1') 
 ```
+
+## カラム名
+
+カラム名はフィールド名のsnake_caseを使用する
+
+```go
+type User struct {
+  ID        uint      // column name is `id`
+  Name      string    // column name is `name`
+  Birthday  time.Time // column name is `birthday`
+  CreatedAt time.Time // column name is `created_at`
+}
+```
+
+カラムタグを使用することでカラム名を上書きできる
+
+```go
+type Animal struct {
+  AnimalID int64     `gorm:"column:beast_id"`         // set name to `beast_id`
+  Birthday time.Time `gorm:"column:day_of_the_beast"` // set name to `day_of_the_beast`
+  Age      int64     `gorm:"column:age_of_the_beast"` // set name to `age_of_the_beast`
+}
+```
