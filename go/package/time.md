@@ -90,3 +90,18 @@ day := time.Now()
 const layout = "2006-01-02"
 fmt.Println(day.Format(layout)) // => "2022-04-15"
 ```
+
+## 月初や月末の日付を取得する
+
+```go
+// 月初はtime.Dateを使って1日を指定して取得
+t1 := time.Now()
+t2 := time.Date(t1.Year(), t1.Month(), 1, 0, 0, 0,0, time.Local)
+fmt.Println(t2)
+// 2022-04-01 00:00:00 +0000 UTC
+
+// 月末は月初からAddDateで-1日する
+t3 := time.Date(t1.Year(), t1.Month()+1, 1, 0, 0, 0,0, time.Local).AddDate(0, 0, -1)
+fmt.Println(t3)
+// 2022-04-30 00:00:00 +0000 UTC
+```
