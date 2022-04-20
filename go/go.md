@@ -257,6 +257,25 @@ p.X // == 2
 p.Y // == 1
 ```
 
+### 構造体の比較
+
+cf. [Goにおける等値と等価の考察(struct1==struct2と&struct1==&struct2とreflect.DeepEqual(struct1,struct2)とreflect.DeepEqual(&struct1,&struct2)) - Qiita](https://qiita.com/Sekky0905/items/1ff4979d80b163e0aeb6)
+
+以下のどれを使うか
+- struct1==struct2
+- &struct1==&struct2
+- reflect.DeepEqual(struct1, struct2)
+
+構造体が完全に同一のものかを確認するときは `&struct1==&struct1` で比較する（アドレスでの比較）
+
+構造体が指しているものが同じ内容かを確認するときは `reflect.DeepEqual(struct1, struct2)` か `struct1==struct2` を使う
+
+
+
+```go
+
+```
+
 ## 関数
 `func 関数名（引数　引数の型）戻り値の型 {}` の形式で定義する
 
@@ -429,3 +448,4 @@ for _, v := range pow {
 bool型: false
 
 string型: ""（空文字列）
+
