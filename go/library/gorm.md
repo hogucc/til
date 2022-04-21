@@ -247,3 +247,43 @@ type Animal struct {
   Age      int64     `gorm:"column:age_of_the_beast"` // set name to `age_of_the_beast`
 }
 ```
+
+### 導出表の結合
+
+Joinsを使用して導出表を結合できる
+
+```go
+type User struct {
+    Id  int
+    Age int
+}
+
+type Order struct {
+    UserId     int
+    FinishedAt *time.Time
+}
+
+// 導出表の作成
+query := db.Table("order").Select("MAX(order.finished_at) as latest").Joins("left join user user on order.user_id = user.id").Where("user.age > ?", 18).Group("order.user_id")
+
+// 結合
+db.Model(&Order{}).Joins("join (?) q on order.finished_at = q.latest", query).Scan(&results)
+// SELECT `order`.`user_id`,`order`.`finished_at` FROM `order` join (SELECT MAX(order.finished_at) as latest FROM `order` left join user user on order.user_id = user.id WHERE user.age > 18 GROUP BY `order`.`user_id`) q on order.finished_at = q.latest
+```
+
+### Scan
+
+レコード取得結果を構造体へスキャン
+
+```go
+type Result struct {
+  Name string
+  Age  int
+}
+
+var result Result
+db.Table("users").Select("name", "age").Where("name = ?", "Antonio").Scan(&result)
+
+// Raw SQL
+db.Raw("SELECT name, age FROM users WHERE name = ?", "Antonio").Scan(&result)
+```
