@@ -270,10 +270,30 @@ cf. [Goにおける等値と等価の考察(struct1==struct2と&struct1==&struct
 
 構造体が指しているものが同じ内容かを確認するときは `reflect.DeepEqual(struct1, struct2)` か `struct1==struct2` を使う
 
+`reflect.DeepEqual` よりも `go-cmp` のほうが高度な検証が可能
 
+https://github.com/google/go-cmp
 
 ```go
+if diff := cmp.Diff(cat1, cat2); diff != "" {
+  t.Errorf("User value is mismatch (-cat1 +cat2):\n%s, diff))
+}
+```
 
+構造体のあるフィールドを比較対象から除く場合は `cmpopts.IgnoreFields` を使う
+
+```go
+type Cat Struct {
+  Name string
+  CreatedAt time.Time
+  UpdatedAt time.Time
+}
+
+opt := cmpopts.IgnoreFields(Cat{}, "CreatedAt", "UpdatedAt")
+
+if diff := cmp.Diff(cat1, cat2, opt); diff != "" {
+  t.Errorf("Cat value is mismatch (-cat1 +cat2):%s\n", diff)
+}
 ```
 
 ## 関数
