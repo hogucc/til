@@ -105,3 +105,21 @@ t3 := time.Date(t1.Year(), t1.Month()+1, 1, 0, 0, 0,0, time.Local).AddDate(0, 0,
 fmt.Println(t3)
 // 2022-04-30 00:00:00 +0000 UTC
 ```
+
+## 翌月を取得する
+
+AddDateで加算して翌月を取得する
+
+```go
+now := time.Now()
+nextMonth := now.AddDate(0, 1, 0)
+fmt.Println(nextMonth)
+```
+nowが8/31の場合、9/31は存在せず10/1が取得される
+
+こういうケースは翌々月の1日から以下のように日付を-1する必要がある
+
+```go
+now := time.Now()
+now.AddDate(0, 2, -1)
+```
