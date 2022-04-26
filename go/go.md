@@ -479,3 +479,19 @@ bool型: false
 
 string型: ""（空文字列）
 
+## エラーの扱い
+
+https://go-tour-jp.appspot.com/methods/19
+
+error型は組み込みのインターフェース
+
+```go
+i, err := strconv.Atoi("42")
+if err != nil {
+    fmt.Printf("couldn't convert number: %v\n", err)
+    return
+}
+fmt.Println("Converted integer:", i)
+```
+
+errがnilの場合は成功、nilでない場合は失敗
