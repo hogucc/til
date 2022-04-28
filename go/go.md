@@ -325,6 +325,43 @@ func swap(x, y string)(string, string) {
 }
 ```
 
+### 可変長引数
+
+引数の型名の前に `...` をつけると可変長引数になる
+
+```go
+func 関数名(引数名 ...型名) 型名 {
+  関数の中身
+}
+```
+
+たとえば以下のように書くと、uniqueの引数ssが可変長となり、`unique(l, d)` で渡している2つの配列が渡される
+```go
+func unique(ss ...[]string) []string {
+	m := map[string]int{}
+	for _, s := range ss {
+		for _, v := range s {
+			m[v]++ // 出現回数をカウント
+		}
+	}
+	res := []string{}
+	for k, v := range m {
+		if v == 1 {
+			// 出現回数が１回のものだけを抽出
+			res = append(res, k)
+		}
+	}
+	return res
+}
+
+func main() {
+	l := []string{"0", "1", "2", "3", "4"}
+	d := []string{"2", "3", "4"}
+	u := unique(l, d)
+	fmt.Println(u)
+}
+```
+
 ## メソッド
 
 Goにはクラスのしくみはないが、型にメソッドを定義できるようになる
