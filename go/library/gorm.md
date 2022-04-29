@@ -287,3 +287,18 @@ db.Table("users").Select("name", "age").Where("name = ?", "Antonio").Scan(&resul
 // Raw SQL
 db.Raw("SELECT name, age FROM users WHERE name = ?", "Antonio").Scan(&result)
 ```
+
+## レコードの更新
+
+https://gorm.io/ja_JP/docs/update.html
+
+すべてのフィールドを保存する場合は以下のように書く
+
+```go
+db.First(&user)
+
+user.Name = "jinzhu 2"
+user.Age = 100
+db.Save(&user)
+// UPDATE users SET name='jinzhu 2', age=100, birthday='2016-01-01', updated_at = '2013-11-17 21:34:10' WHERE id=111
+```
