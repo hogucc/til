@@ -327,7 +327,7 @@ func swap(x, y string)(string, string) {
 
 ### 可変長引数
 
-引数の型名の前に `...` をつけると可変長引数になる
+引数の型名の前に `...` をつけると可変長引数になる（型を統一する必要あり）
 
 ```go
 func 関数名(引数名 ...型名) 型名 {
@@ -361,6 +361,42 @@ func main() {
 	fmt.Println(u)
 }
 ```
+
+### オプション引数
+
+Goは可変長引数は存在するが、同じ型しか受け取れない
+
+型がばらばらで任意の引数を渡したい場合は、引数用の構造体の定義するのが手っ取り早い
+
+以下のコードは https://raahii.github.io/posts/optional-parameters-in-go/ から引用
+
+```go
+type GreetOpts struct {
+	GreetingWord *string
+}
+
+// オプショナルパラメータを構造体で受け取る
+func Greet(name string, opts *GreetOpts) {
+	greetingWord := "Hello"
+	if opts.GreetingWord != nil {
+      // 引数がnilだったら未指定なのでデフォルト値で埋める
+		greetingWord = *opts.GreetingWord
+	}
+	fmt.Printf("%s, %s!\n", greetingWord, name)
+}
+
+func main() {
+	Greet("gopher", &GreetOpts{}) // Hello, gopher!
+
+	word := "Hey"
+	Greet("gopher", &GreetOpts{GreetingWord: &word}) // Hey, gopher!
+}
+```
+
+また、以下の点に注意。ゼロ値なのか未指定なのか区別をするためにポインターを使う
+
+> 構造体は初期化時に未指定のフィールドがゼロ値で埋まります．そのため，引数が実際に未指定だったのか，ゼロ値が指定されたのかを区別するため，型をポインタにして nil を受け取れるようにしています．
+
 
 ## メソッド
 
