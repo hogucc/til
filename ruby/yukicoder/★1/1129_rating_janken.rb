@@ -5,20 +5,24 @@ class RockPaperScissors
 
   COMPATIBLE_TABLE = {ROCK => Scissor, Scissor => Paper, Paper => ROCK}
 
-  def self.win?(player_hand, rival_hand)
+  def self.play
+    new.winner
+  end
+
+  def win?(player_hand, rival_hand)
     return false if COMPATIBLE_TABLE[player_hand] != rival_hand
     true
   end
 
-  def self.winner
+  def winner
     a, b, c, d = gets.split.map(&:to_i)
 
     return 'null' if a > c
     return 'tRue' if a < c
     return 'Draw' if b == d
-    return 'null' if self.win?(b, d)
+    return 'null' if win?(b, d)
     'tRue'
   end
 end
 
-puts RockPaperScissors.winner
+puts RockPaperScissors.play
