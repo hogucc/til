@@ -1,4 +1,3 @@
-# ひとまず愚直に実装
 class RockPaperScissors
   ROCK = 0
   Scissor = 1
@@ -14,21 +13,11 @@ class RockPaperScissors
   def self.winner
     a, b, c, d = gets.split.map(&:to_i)
 
-    if a != c
-      if a > c
-        'null'
-      else
-        'tRue'
-      end
-    elsif b != d
-      if self.win?(b, d)
-        'null'
-      else
-        'tRue'
-      end
-    else
-      'Draw'
-    end
+    return 'null' if a > c
+    return 'tRue' if a < c
+    return 'Draw' if b == d
+    return 'null' if self.win?(b, d)
+    'tRue'
   end
 end
 
