@@ -267,6 +267,8 @@ p.X // == 2
 p.Y // == 1
 ```
 
+大文字から始まる構造体定義（そのほか関数名や型名、フィールド名も）は他のパッケージからのアクセスも可能にする
+
 ### 構造体の比較
 
 cf. [Goにおける等値と等価の考察(struct1==struct2と&struct1==&struct2とreflect.DeepEqual(struct1,struct2)とreflect.DeepEqual(&struct1,&struct2)) - Qiita](https://qiita.com/Sekky0905/items/1ff4979d80b163e0aeb6)
