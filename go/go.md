@@ -556,9 +556,18 @@ string型: ""（空文字列）
 
 ## エラーの扱い
 
-https://go-tour-jp.appspot.com/methods/19
+Goにはtry-catch構文が存在しない。errorインターフェースを実装した構造体を返却することで例外発生を表現する
 
-error型は組み込みのインターフェース
+errorインターフェースはGoに組み込まれている
+
+```go
+// stringを返すErrorというメソッドが実装してあれば、なんでもerror
+type error Interface {
+  Error() string
+}
+```
+
+https://go-tour-jp.appspot.com/methods/19
 
 ```go
 i, err := strconv.Atoi("42")
@@ -570,3 +579,12 @@ fmt.Println("Converted integer:", i)
 ```
 
 errがnilの場合は成功、nilでない場合は失敗
+
+### `iferr`
+Goをサポートしているエディタでは `iferr` と打ってTabキーを押すと以下まで展開してくれる
+
+```go
+if err != nil {
+  return
+}
+```
