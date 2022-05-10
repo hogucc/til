@@ -20,3 +20,5 @@ bundle add rails --group "development, test"
 bundle updateは依存するライブラリもすべてバージョンアップされる
 
 bundle update --conservativeを使うと、指定したライブラリのバージョンだけあげることができる
+
+`bundle update -g development -g test` でdevelopmentグループとtestグループのgemを先にアップデートできる
