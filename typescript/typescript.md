@@ -1,3 +1,10 @@
+用語の整理
+- 型引数: 型を宣言するときにパラメーターを持たせられる
+    - 型名の後に<>で囲った部分が型引数
+    - `type User<T>`
+- ジェネリック型: 型引数を持つ型
+- ジェネリクス: 型引数を受け取る関数を作る機能
+
 # ジェネリクス(generics)
 
 cf. https://typescriptbook.jp/reference/generics
@@ -29,3 +36,18 @@ chooseRandomly<URL>(urlA, urlB);
 型変数が2つの場合はTとUが用いられる
 
 型変数に代入した値は型引数（`chooseRandomly<string>` のstringが型引数）
+
+## ジェネリック型
+
+型引数を持つ型のこと
+
+※プロを目指す人のためのTypeScript入門から引用
+
+↓型引数を持つ型の例
+```typescript
+type Family<Parent, Child> = {
+    mother: Parent,
+    father: Parent,
+    child: Child,
+}
+```
