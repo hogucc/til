@@ -29,3 +29,31 @@ def roman_to_int(s)
     end
   end.sum
 end
+
+# 他の人が書いたコード
+# if文で次のローマ数字が今のローマ数字より大きければtempという一時変数に入れてresには加算しない
+# 次のループでtempに入れた数を引くようにしている
+# たしかにこれだとすっきり書けてよさそう
+ROM_NUMS = {
+  "I" => 1,
+  "V" => 5,
+  "X" => 10,
+  "L" => 50,
+  "C" => 100,
+  "D" => 500,
+  "M" => 1000
+}
+
+def roman_to_int(s)
+  res = 0
+  temp = 0
+  s.chars.each_with_index do |el, i|
+    if ROM_NUMS[s[i + 1]] && ROM_NUMS[el] < ROM_NUMS[s[i+1]]
+      temp = ROM_NUMS[el]
+    else
+      res += (ROM_NUMS[el] - temp)
+      temp = 0
+    end
+  end
+  res
+end
