@@ -126,3 +126,48 @@ a = [1, 3, 5]
 a.reject!{|x| x % 2 == 0}
 # => nil
 ```
+
+## #drop(n) -> Array
+配列の先頭のn要素を捨てて、残りの要素を配列として返す
+
+```ruby
+a = [1, 2, 3, 4, 5, 0]
+a.drop(3) # => [4, 5, 0]
+# 破壊的変更ではないのでaの値は変化しない
+a # => [1, 2, 3, 4, 5, 0]
+```
+
+## #drop_while -> Enumerator, drop_while {|element| ... } -> Array
+
+ブロックを評価して最初に偽になった要素の手前まで捨てて、残りの要素を配列として返す
+
+```ruby
+a = [1, 2, 3, 4, 5, 0]
+a.drop_while {|i| i < 3} # => [3, 4, 5, 0]
+
+# 最初に偽になった要素の手前なので、7の手前で切れる（2は含まれない）
+a = [1, 7, 2, 5, 0]
+a.drop_while{|i| i < 3} # => [7, 2, 5, 0]
+# 破壊的変更ではないのでaの値は変化しない
+a # => [1, 7, 2, 5, 0]
+```
+
+Railsのコードでも使われている
+https://github.com/rails/rails/blob/0d18b43f6ee1ad460cfe7790a79a513438343669/actionpack/lib/action_dispatch/journey/formatter.rb#L105
+
+```ruby
+keys_to_keep = route.parts.reverse_each.drop_while { |part|
+  !(options.key?(part) || route.scope_options.key?(part)) || (options[part].nil? && recall[part].nil?)
+} | route.required_parts
+```
+
+## #reverse_each
+各要素に対して逆順にブロックを評価する
+
+ブロックが与えられない場合は、自身とreverse_eachから生成したEnumeratorオブジェクトを返す
+
+```ruby
+a = ["a", "b", "c"]
+a.reverse_each {|x| print x, " "} # => c b a
+```
+
