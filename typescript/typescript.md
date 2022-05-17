@@ -5,6 +5,14 @@
 - ジェネリック型: 型引数を持つ型
 - ジェネリクス: 型引数を受け取る関数を作る機能
 
+# TS以外のトランスパイラ
+
+CoffeScriptやDartはJavaScript以外の言語をJavaScript環境で動かせるようにする
+
+TSはJavaScript+αのコードを動かせるようにするためのトランスパイラ
+
+また、BabelもJSの最新の言語仕様を古いJSの環境でも実行できるように変換するトランスパイラだが、TSと異なり、型のチェックは行わない
+
 # ジェネリクス(generics)
 
 cf. https://typescriptbook.jp/reference/generics
