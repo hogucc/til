@@ -101,6 +101,68 @@ float32 float64
 complex64 complex128
 ```
 
+### intは実行環境に依存したサイズになる
+intは実行環境によって32ビットだったり64ビットだったりする
+
+なので、明示的にサイズを指定してければ、intではなくint32とかint64を指定する必要がある
+
+intの範囲を超えた場合はオーバーフローを起こすが、エラーにはならない
+
+オーバーフローしたらラップアラウンドされ、
+
+- 扱える範囲の最大値に達した後に、最小値に戻る。
+- 扱える範囲の最小値に達した後に、最大値に戻る。
+
+書いたサンプル
+https://go.dev/play/p/nyZUgATpPRS
+
+```go
+// You can edit this code!
+// Click here and start typing.
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("overflowInt32Min")
+	overflowInt32Min()
+
+	fmt.Println("overflowInt32Max")
+	overflowInt32Max()
+}
+
+func overflowInt32Min() {
+	var a, b, c int32
+	a = -2147483648
+	b = 0
+	c = -1
+
+	fmt.Println(a, "+", b, "=>", a+b)
+	fmt.Println(a, "+", c, "=>", a+c)
+}
+
+func overflowInt32Max() {
+	var a, b, c int32
+	a = 2147483647
+	b = 0
+	c = 1
+
+	fmt.Println(a, "+", b, "=>", a+b)
+	fmt.Println(a, "+", c, "=>", a+c)
+}
+```
+
+以下が出力結果
+
+```go
+overflowInt32Min
+-2147483648 + 0 => -2147483648
+-2147483648 + -1 => 2147483647
+overflowInt32Max
+2147483647 + 0 => 2147483647
+2147483647 + 1 => -2147483648
+```
+
 ## 配列型
 
 ```go
