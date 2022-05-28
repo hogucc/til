@@ -84,3 +84,22 @@ class Foo
   end
 end
 ```
+
+## Policy Object
+
+ユーザーの役割によって、権限をもつかどうかを判定する
+これがないとコントローラーやビューにロジックが染み出してしまう
+
+- https://applis.io/posts/rails-design-patterns#policy%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88
+- https://techracho.bpsinc.jp/hachi8833/2018_03_23/53523
+
+### Policy Objectの規則
+- メソッド名の末尾は常に `?`
+- メソッドはtrueかfalseのいずれかを返す
+- 渡された属性は変更しない
+- コードはシンプルな読み出しロジックだけを行う:データベース呼び出しなどは行わない
+
+### サンプルコード
+https://techracho.bpsinc.jp/hachi8833/2018_03_23/53523の写経
+
+https://github.com/hogucc/policy_object_sample
