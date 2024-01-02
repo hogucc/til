@@ -2,4 +2,5 @@
 
 Today I learned.
 
-https://til-hogucc.netlify.app/ に移行しました
+コードの断片などはこちらに
+それ以外は https://til-hogucc.netlify.app/ 
